@@ -1,41 +1,44 @@
 import React from 'react'
+import { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 // const initialOperator = ["+", "-", "*", "/"]
 const Calculator = () =>  {
-    const [ operators, setOperator ] = ("-");
-    const [ numberOne, setNumberOne ] = ("");
-    const [ numberTwo, setNumberTwo ] = ("");
+    const [ operator, setOperator ] = useState('');
+    const [ numberOne, setNumberOne ] = useState('');
+    const [ numberTwo, setNumberTwo ] = useState('');
 
 
-    const renderOperator = (operator) => {
-    switch (operator) {
+    const calculate = (operator, numberOne, numberTwo) => {
+     switch (operator) {
         case "+":
-            setOperator["+"]
+           return parseInt(numberOne) + parseInt(numberTwo)
           break;
         case "-":
-            setOperator["-"]
+            return parseInt(numberOne) - parseInt(numberTwo)
           break;
         case "*":
-            setOperator["*"]
+            return parseInt(numberOne) * parseInt(numberTwo)
           break;
         case "/":
-            setOperator["/"]
+            return parseInt(numberOne) / parseInt(numberTwo)
           break;
       }
-      console.log("Operator ", operator);
     }
 
   return (
     <>
     <View style={styles.container}>
-        <TextInput style={{borderWidth: 1, margin: 10, padding: 4}} placeholder="Num1" />
-        <TextInput style={{borderWidth: 1, margin: 10}} placeholder="operator"/>
-        <TextInput style={{borderWidth: 1, margin: 10, padding: 4}} placeholder="Num2" />
+        <TextInput style={{borderWidth: 1, margin: 10, padding: 20}} placeholder="Num1" onChangeText={newText => setNumberOne(newText)}/>
+        <TextInput style={{borderWidth: 1, margin: 10, padding: 10}} placeholder="operator" onChangeText={newText => setOperator(newText)}/>
+        <TextInput style={{borderWidth: 1, margin: 10, padding: 20}} placeholder="Num2" onChangeText={newText => setNumberTwo(newText)}/>
     </View>
     <View>
-     <Button title="result"/>  
+     <Button title="result"   onPress={() => {alert(`the result ${calculate(operator, numberOne, numberTwo)}`);}}/>  
     </View>
+    <Text style={{padding: 10, fontSize: 42}}>
+      { }
+    </Text>
     </>
   )
 }
